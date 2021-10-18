@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<style>
+body {
+	background: #ff8bdd;
+}
+
+a {
+    font-size: 19px;
+    font-family: nanumgothic;
+    padding: 10px 30px;
+    background: #d872ba;
+    text-decoration: none;
+    display: table;
+    margin: 0 auto;
+    border-radius: 10px;
+    font-weight: 500;
+    color: #fff1fb;
+}
+
+form {
+	text-align: initial;
+}
+
+.item {
+	display: inline-block;
+	float: left;
+	width: 50%;
+	box-sizing: border-box;
+	padding: 20px;
+	background: #ffffff;
+	border: 1px solid #CCC;
+}
+
+.media-area {
+	height: 350px;
+	border: 1px solid #CCC;
+}
+
+.text {
+	font-family: nanumgothic;
+	color: #626262;
+	margin-bottom: 10px;
+	margin-top: -5px;
+}
+
+.text-area {
+	margin: 10px 0;
+}
+
+.text-area>span>span {
+	font-weight: 5o0;
+}
+
+.button-area {
+	display: flex;
+	height: 50px;
+}
+
+.button-area>* {
+	width: 50%;
+	height: 100%;
+	margin: 0;
+}
+
+form>button {
+	width: 40%;
+	height: 60px;
+	font-size: 18px;
+	border: 1px solid #CCC;
+	display: inline-block;
+	float: left;
+	margin-top:16px;
+}
+
+form:first-child>button {
+    border-right: none;
+    background: #b2c8ed;
+    color: white;
+    margin-left: 10%;
+}
+
+form:last-child>button {
+	text-align: center;
+	background: #d9d9d9;
+	color: white;
+	float: left;
+	margin-right: 10%;
+}
+</style>
+</head>
+<body>
+	<div id="aa" style="text-align: center;">
+		<img id="im" src="/logo.png">
+	</div>
+	<div class="item" th:each="item: ${board5List}">
+		<div class="text">
+			<span>제목: <span class="title" th:text="${item.title}"></span></span>
+			<span>조회수: <span class="viewCount">0</span></span> <span>날짜: <span
+				class="writeDate" th:text="${item.writeDate}"></span></span>
+		</div>
+		<div class="content">
+			<div class="content" th:utext="${item.content}"></div>
+		</div>
+
+		<div class="button">
+			<form action="/update" method="GET">
+				<input type="hidden" name="no" th:value="${item.no}" />
+				<button type="submit">수정하기</button>
+			</form>
+
+			<form action="/delete" method="POST">
+				<input type="hidden" name="no" th:value="${item.no}" />
+				<button type="submit">삭제하기</button>
+			</form>
+		</div>
+
+
+	</div>
+	<div>
+		<a href="/insert">등록하기</a>
+	</div>
+
+</body>
+</html>
